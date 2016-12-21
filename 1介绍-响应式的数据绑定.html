@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<!--插入文本-->
+		<div id="app">{{message}}</div>
+		<!--绑定属性-->
+		<div id="app2" v-bind:title="title">你好！</div>
+		<!--条件判断:v-if的真假控制元素的显示、隐藏-->
+		<div id="app3" v-if="seen">你好1！</div>
+		<!--循环：v-for渲染列表-->
+		<ul id="app4">
+			<li v-for="item in list">{{item}}</li>
+		</ul>
+		<!--事件：v-on绑定事件-->
+		<div id="app5" v-on:click="clickHandle">{{txt}}</div>
+		<!--表单输入和应用状态中数据双向：v-model-->
+		<div id="app6">
+			<input type="text" v-model="txt"><!--输入数据绑定到data，data数据绑定到元素，data改变自动更新视图-->
+			<p>{{txt}}</p>
+		</div>
+	</body>
+	<script>
+		/*
+		  Vue ：渐进式框架--可以满足不同的需求，简单-复杂
+		 两个核心： 响应式的数据绑定、组合的视图组件
+		 一、响应式的数据绑定
+			  声明式渲染：允许使用简洁的模版语法来声明式的将数据渲染进DOM系统
+			  模版语法：https://github.com/aui/artTemplate
+			  声明式：只需关注我们要什么，而不需要关注怎么去做的，vue使我们只需关注视图层，而无需关注怎么去渲染DOM，所有的绑定都是响应式的绑定
+		 * */
+		var v = new Vue({
+			el:'#app',
+			data:{
+				message:'hello Vue!'
+			}
+		})
+		var v2 = new Vue({
+			el:'#app2',
+			data:{
+				title:'this is a text'
+			}
+		})
+		var v3 = new Vue({
+			el:'#app3',
+			data:{
+				seen:true
+			}
+		})
+		var v4 = new Vue({
+			el:'#app4',
+			data:{
+				list:['aaa','bbb','ccc']
+			}
+		})
+		var v5 = new Vue({
+			el:'#app5',	//挂载元素
+			data:{	//数据
+				txt:'abc'
+			},
+			methods:{	//方法
+				clickHandle:function(){
+					this.txt = this.txt.split('').reverse().join('');
+				}
+			}
+		})
+		var v6 = new Vue({
+			el:'#app6',	//挂载元素
+			data:{	//数据
+				txt:'abc'
+			},
+		});
+
+	</script>
+</html>
