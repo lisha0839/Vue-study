@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			.back{
+				color:red;
+			}
+			.bg{
+				background: yellow;
+			}
+			.size{
+				font-size: 30px;
+			}
+		</style>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p v-once>{{p1}}</p>
+			<p v-html="p2"></p>
+			<p v-bind:class="p3">{{p1}}</p>
+			<p v-bind:class="p3">{{p1+p3}}</p>
+		</div>
+	</body>
+	<script>
+		/*
+		 插值：
+			插入文本：{{txt}}解释为纯文本(innerText)  v-once执行一次插值
+		 	插入html:v-html="p1"输出html(innerHTML)
+		 	添加属性：v-bind
+		 	表达式：
+		 * */
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				p1:'第一段<a href="#">我爱北京</a>',
+				p2:'第一段<a href="#">我爱北京</a>',
+				p3:'back',
+				p4:5
+			}
+		})
+		
+	</script>
+</html>
