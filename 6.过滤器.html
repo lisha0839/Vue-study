@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p>{{name}}转换为{{name | upper |reverse('can')}}</p>
+		</div>
+	</body>
+	<script>
+		/*
+		 过滤器：文本格式化（文本转换），被添加在{{}}插值的尾部，由管道符指示
+		 	只能在{{}}和v-bind表达式中使用
+		 	过滤器函数总接收表达式的值作为第一参数
+		 	过滤器可以串联
+		 	过滤器可以接收参数，参数从第二个开始
+		 * */
+		new Vue({
+			el:'#app',
+			data:{
+				name:'abc'
+			},
+			filters:{
+				upper:function(value){
+					return value.toUpperCase();
+				},
+				reverse:function(value,str){
+					return value.split('').reverse().join('')+str;
+				}
+			}
+		})
+	</script>
+</html>
