@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			.back{
+				color:red;
+			}
+			
+		</style>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p v-pre>{{msg}}</p>
+			<p v-text="msg"></p>	<!--文本内容全部更新-->
+			<p>部分更新内容{{msg}}</p>
+			<p v-show="seen">元素的显示隐藏</p>
+			<p v-if="seen">这是控制移除/插入</p>
+			<p v-else>与前面兄弟元素状态相反</p>
+			<!--遍历数组-->
+			<p v-for="(item,index) in list" v-bind:index=index>{{item}}</p>
+			<!--遍历对象键值-->
+			<p v-for="(val,key,index) in list2" :index=index>{{val}}</p>
+			<p :style="{fontSize:size+'px'}">绑定属性</p >
+			
+		</div>
+	</body>
+	<script>
+		/*
+		 指令：当表达式值改变时相应地将某些行为应用到DOM上
+		 	v-once:只渲染元素和组件一次
+		 	v-text:更新元素文本内容，如果部分更新要用{{}}  innerText
+		 	v-html:更新元素innerHTML
+		 	
+		 	v-show:根据表达式的值，切换display:block / none;
+			v-if="seen" 根据表达式的真假来移除/插入p元素
+			v-else:不需要表达式，其前一兄弟元素必须有v-if或v-else-if
+			v-else-if:参考原生if\else，其前一兄弟元素必须有v-if或v-else-if
+			
+			v-for:基于数据多次渲染元素,使用 item in arr遍历
+				v-for只是替换元素，不改变整体。迫使其重新排序元素，需提供key的特殊属性
+			
+			v-on:绑定事件监听
+				修饰符：指出一个指定应该以特殊方式绑定
+					  .stop调用e.stopPropagation()		.prevent调用e.preventDefault()
+					  .capture添加事件使用capture模式	.self:绑定事件的元素本身触发才执行
+				普通元素只能监听原生DOM事件，自定义元素还可以监听子元素自定义事件
+				<button @click.stop.prevent="doThis"></button>
+				<button v-on:click="doThat('hello', $event)"></button>
+			
+			v-bind:动态绑定属性或一个组件的prop到表达式
+			v-model:在表单控件或组件上创建双向绑定
+				作用元素：input\select\textarea\组件
+				修饰符：.lazy取代input的change事件	.number输入的字符串转为数字	.tirm去除输入首尾的空格
+		 * */
+		var vm = new Vue({
+			el:'#app',
+			data:{
+				msg:'textcontent',
+				seen:true,
+				list:['aaa','bbb','ccc'],
+				list2:{
+					name:'li',
+					sex:'girl',
+					age:'22'
+				},
+				size:30
+			},
+			methods:{
+				click:function(){
+					console.log(1)
+				}
+			}
+		})
+		
+	</script>
+</html>
